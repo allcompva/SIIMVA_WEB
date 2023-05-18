@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\MOTOR_WORKFLOW.props" />
+</Project>

@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "RxtzK1KM/lXNgAQljAi/tIp+eNV+HXDldsC9uLp2ed8=",
+  "Source": "MOTOR_WORKFLOW",
+  "BasePath": "_content/MOTOR_WORKFLOW",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MOTOR_WORKFLOW\\wwwroot",
+      "Source": "MOTOR_WORKFLOW",
+      "ContentRoot": "D:\\Municipalidad\\SIIMVA_WEB\\SIIMVA_WEB\\wwwroot\\",
+      "BasePath": "_content/MOTOR_WORKFLOW",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
