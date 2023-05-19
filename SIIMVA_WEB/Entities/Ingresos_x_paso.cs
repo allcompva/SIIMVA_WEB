@@ -108,6 +108,29 @@ namespace MOTOR_WORKFLOW.Entities
                 throw ex;
             }
         }
+        public static int maxOrden(int idPaso)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                ingresos_x_paso obj = null;
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"SELECT ISNULL(MAX(ORDEN), 0)
+                                        FROM INGRESOS_X_PASO
+                                        WHERE ID_PASO = @ID_PASO";
+                    cmd.Parameters.AddWithValue("@ID_PASO", idPaso);
+                    cmd.Connection.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static string getNombreByPk(
         int ID)
         {
@@ -146,6 +169,7 @@ namespace MOTOR_WORKFLOW.Entities
         {
             try
             {
+                int orden = maxOrden(obj.id_paso) + 1;
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("INSERT INTO ingresos_x_paso(");
                 sql.AppendLine("id_paso");

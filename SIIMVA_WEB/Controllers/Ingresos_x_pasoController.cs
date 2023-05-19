@@ -36,7 +36,32 @@ namespace MOTOR_WORKFLOW.Controllers
             }
             return Ok(Ingresos_x_paso);
         }
-
+        [HttpPost]
+        public IActionResult insert(Entities.ingreso_paso_model obj)
+        {
+            try
+            {
+                _Ingresos_x_pasoService.insert(obj);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public IActionResult update(Entities.ingreso_paso_model obj)
+        {
+            try
+            {
+                _Ingresos_x_pasoService.update(obj);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
 
 

@@ -9,8 +9,8 @@ namespace MOTOR_WORKFLOW.Services
     {
         public List<ingresos_x_paso> read(int idPaso);
         public ingresos_x_paso getByPk(int ID);
-        public int insert(ingresos_x_paso obj);
-        public void update(ingresos_x_paso obj);
+        public int insert(ingreso_paso_model obj);
+        public void update(ingreso_paso_model obj);
         public void delete(ingresos_x_paso obj);
     }
 }

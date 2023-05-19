@@ -32,7 +32,7 @@ namespace MOTOR_WORKFLOW.Services
                 throw ex;
             }
         }
-        public int insert(ingresos_x_paso obj)
+        public int insert(ingreso_paso_model obj)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace MOTOR_WORKFLOW.Services
                 throw ex;
             }
         }
-        public void update(ingresos_x_paso obj)
+        public void update(ingreso_paso_model obj)
         {
             try
             {

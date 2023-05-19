@@ -40,6 +40,7 @@ namespace MOTOR_WORKFLOW
             services.AddScoped<Services.CIDI.IUsuariosServices, Services.CIDI.UsuariosService>();
             services.AddScoped<Services.LOGIN.IUsuarioConOficina, Services.LOGIN.UsuarioConOficina>();
             services.AddScoped<Services.IOficinasService, Services.OficinasService>();
+            services.AddScoped<Services.IIngresos_x_pasoService, Services.Ingresos_x_pasoService>();
             services.AddCors();
 
         }
