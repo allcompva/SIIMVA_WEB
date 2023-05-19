@@ -192,7 +192,7 @@ namespace MOTOR_WORKFLOW.Entities
                     cmd.CommandText = sql.ToString();
                     cmd.Parameters.AddWithValue("@id_paso", obj.id_paso);
                     cmd.Parameters.AddWithValue("@titulo", obj.titulo);
-                    cmd.Parameters.AddWithValue("@orden", obj.orden);
+                    cmd.Parameters.AddWithValue("@orden", orden);
 
                     cmd.Connection.Open();
                     return Convert.ToInt32(cmd.ExecuteScalar());

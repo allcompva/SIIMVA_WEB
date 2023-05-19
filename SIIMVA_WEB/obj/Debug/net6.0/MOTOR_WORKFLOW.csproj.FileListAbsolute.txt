@@ -150,3 +150,9 @@ D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\refint\MOTOR_WORKFLOW.dl
 D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\MOTOR_WORKFLOW.pdb
 D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\MOTOR_WORKFLOW.genruntimeconfig.cache
 D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\ref\MOTOR_WORKFLOW.dll
+D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\bin\Debug\net6.0\MOTOR_WORKFLOW.staticwebassets.runtime.json
+D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\staticwebassets\msbuild.MOTOR_WORKFLOW.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\staticwebassets\msbuild.build.MOTOR_WORKFLOW.props
+D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.MOTOR_WORKFLOW.props
+D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.MOTOR_WORKFLOW.props
+D:\Municipalidad\SIIMVA_WEB\SIIMVA_WEB\obj\Debug\net6.0\staticwebassets.pack.json

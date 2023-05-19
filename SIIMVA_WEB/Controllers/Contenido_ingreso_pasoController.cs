@@ -26,7 +26,22 @@ namespace MOTOR_WORKFLOW.Controllers
             }
             return Ok(Contenido_ingreso_paso);
         }
-
+        [HttpGet]
+        public IActionResult read(int id_ingreso_paso)
+        {
+            var Contenido_ingreso_paso = _Contenido_ingreso_pasoService.read(id_ingreso_paso);
+            if (Contenido_ingreso_paso == null)
+            {
+                return BadRequest(new { message = "Error al obtener los datos" });
+            }
+            return Ok(Contenido_ingreso_paso);
+        }
+        [HttpGet]
+        public IActionResult maxRow(int id_ingreso_paso)
+        {
+            int max_row = _Contenido_ingreso_pasoService.maxRow(id_ingreso_paso);
+            return Ok(max_row);
+        }
 
 
 

@@ -21,6 +21,18 @@ namespace MOTOR_WORKFLOW.Services
                 throw ex;
             }
         }
+        public int maxRow(int id_ingreso_paso)
+        {
+            try
+            {
+                return contenido_ingreso_paso.maxRow(id_ingreso_paso);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public List<contenido_ingreso_paso> read(int idIngresoPaso)
         {
             try
@@ -32,7 +44,7 @@ namespace MOTOR_WORKFLOW.Services
                 throw ex;
             }
         }
-        public int insert(contenido_ingreso_paso obj)
+        public int insert(contenido_ingreso_paso_model obj)
         {
             try
             {

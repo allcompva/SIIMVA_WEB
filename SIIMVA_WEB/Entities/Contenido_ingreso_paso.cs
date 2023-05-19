@@ -126,16 +126,16 @@ namespace MOTOR_WORKFLOW.Entities
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = 
+                    cmd.CommandText =
                         @"SELECT 
 	                        A.*,
 	                        B.id AS id_formulario,
 	                        C.id AS id_adjunto,
 	                        D.id AS id_ddjj
                         FROM contenido_ingreso_paso A
-                        LEFT JOIN FORMULARIO B ON A.id=B.id_pasos
-                        LEFT JOIN ADJUNTO C ON A.id=C.id_pasos
-                        LEFT JOIN DDJJ D ON A.id=D.id_pasos
+                        LEFT JOIN FORMULARIO B ON A.id=B.ID_CONTENIDO_INGRESO_PASO
+                        LEFT JOIN ADJUNTO C ON A.id=C.ID_CONTENIDO_INGRESO_PASO
+                        LEFT JOIN DDJJ D ON A.id=D.ID_CONTENIDO_INGRESO_PASO
                         WHERE A.id=@id";
                     cmd.Parameters.AddWithValue("@id", ID);
                     cmd.Connection.Open();
@@ -152,16 +152,57 @@ namespace MOTOR_WORKFLOW.Entities
             }
         }
 
-        public static int insert(contenido_ingreso_paso obj)
+        public static int maxOrden(int id_ingreso_paso)
+        {
+            try
+            {
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText =
+                        @"SELECT ISNULL(MAX(orden), 0) 
+                          FROM contenido_ingreso_paso 
+                          WHERE id_ingreso_paso=@id_ingreso_paso";
+                    cmd.Parameters.AddWithValue("@id_ingreso_paso", id_ingreso_paso);
+                    cmd.Connection.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static int maxRow(int id_ingreso_paso)
+        {
+            try
+            {
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText =
+                        @"SELECT ISNULL(MAX(row), 0) 
+                          FROM contenido_ingreso_paso 
+                          WHERE id_ingreso_paso=@id_ingreso_paso";
+                    cmd.Parameters.AddWithValue("@id_ingreso_paso", id_ingreso_paso);
+                    cmd.Connection.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static void _insert(contenido_ingreso_paso_model obj)
         {
             try
             {
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("INSERT INTO contenido_ingreso_paso(");
                 sql.AppendLine("id_ingreso_paso");
-                sql.AppendLine(", id_formulario");
-                sql.AppendLine(", id_adjunto");
-                sql.AppendLine(", id_ddjj");
                 sql.AppendLine(", orden");
                 sql.AppendLine(", row");
                 sql.AppendLine(", col");
@@ -170,9 +211,6 @@ namespace MOTOR_WORKFLOW.Entities
                 sql.AppendLine("VALUES");
                 sql.AppendLine("(");
                 sql.AppendLine("@id_ingreso_paso");
-                sql.AppendLine(", @id_formulario");
-                sql.AppendLine(", @id_adjunto");
-                sql.AppendLine(", @id_ddjj");
                 sql.AppendLine(", @orden");
                 sql.AppendLine(", @row");
                 sql.AppendLine(", @col");
@@ -185,16 +223,56 @@ namespace MOTOR_WORKFLOW.Entities
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = sql.ToString();
                     cmd.Parameters.AddWithValue("@id_ingreso_paso", obj.id_ingreso_paso);
-                    cmd.Parameters.AddWithValue("@id_formulario", obj.id_formulario);
-                    cmd.Parameters.AddWithValue("@id_adjunto", obj.id_adjunto);
-                    cmd.Parameters.AddWithValue("@id_ddjj", obj.id_ddjj);
                     cmd.Parameters.AddWithValue("@orden", obj.orden);
                     cmd.Parameters.AddWithValue("@row", obj.row);
                     cmd.Parameters.AddWithValue("@col", obj.col);
                     cmd.Parameters.AddWithValue("@activo", obj.activo);
                     cmd.Connection.Open();
-                    return Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.ExecuteNonQuery();
                 }
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        public static int insert(contenido_ingreso_paso_model obj)
+        {
+            try
+            {
+                int orden = maxOrden(obj.id_ingreso_paso);
+
+                switch (obj.col)
+                {
+                    case 12:
+                        obj.orden = orden + 1;
+                        _insert(obj);
+                        break;
+                    case 6:
+                        obj.orden = orden + 1;
+                        _insert(obj);
+                        obj.orden = orden + 2;
+                        _insert(obj);
+                        break;
+                    case 4:
+                        obj.orden = orden + 1;
+                        _insert(obj);
+                        obj.orden = orden + 2;
+                        _insert(obj);
+                        obj.orden = orden + 3;
+                        _insert(obj);
+                        break;
+                    case 3:
+                        obj.orden = orden + 1;
+                        _insert(obj);
+                        obj.orden = orden + 2;
+                        _insert(obj);
+                        obj.orden = orden + 3;
+                        _insert(obj);
+                        obj.orden = orden + 4;
+                        _insert(obj);
+                        break;
+                    default:
+                        break;
+                }
+                return 0;
             }
             catch (Exception ex)
             {

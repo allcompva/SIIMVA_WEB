@@ -142,7 +142,6 @@ namespace MOTOR_WORKFLOW.Entities
             }
             return lst;
         }
-
         public static List<Paso> read(int idTramite)
         {
             try
@@ -266,10 +265,32 @@ namespace MOTOR_WORKFLOW.Entities
                 throw ex;
             }
         }
+        public static int maxOrden(int id_tramite)
+        {
+            try
+            {
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText =
+                        @"SELECT ISNULL(MAX(ORDEN), 0) FROM Paso 
+                          WHERE ID_TRAMITE = @ID_TRAMITE";
+                    cmd.Parameters.AddWithValue("@ID_TRAMITE", id_tramite);
+                    cmd.Connection.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar());    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static int insert(PasoModel obj)
         {
             try
             {
+                int orden = maxOrden(obj.id_tramite);
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("INSERT INTO Paso(");
                 sql.AppendLine("id_tramite");
@@ -312,7 +333,7 @@ namespace MOTOR_WORKFLOW.Entities
                     else
                         cmd.Parameters.AddWithValue("@en_usuario", obj.en_usuario);
                     cmd.Parameters.AddWithValue("@nombre", obj.nombre);
-                    cmd.Parameters.AddWithValue("@orden", obj.orden);
+                    cmd.Parameters.AddWithValue("@orden", orden + 1);
                     cmd.Parameters.AddWithValue("@activo", 1);
                     if (obj.es_final)
                         cmd.Parameters.AddWithValue("@es_final", obj.es_final);
@@ -334,7 +355,7 @@ namespace MOTOR_WORKFLOW.Entities
             {
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("UPDATE  Paso SET");
-                sql.AppendLine(", id_oficina=@id_oficina");
+                sql.AppendLine("id_oficina=@id_oficina");
                 sql.AppendLine(", en_usuario=@en_usuario");
                 sql.AppendLine(", nombre=@nombre");
                 sql.AppendLine(", es_final=@es_final");
@@ -351,6 +372,7 @@ namespace MOTOR_WORKFLOW.Entities
                     cmd.Parameters.AddWithValue("@nombre", obj.nombre);
                     cmd.Parameters.AddWithValue("@es_final", obj.es_final);
                     cmd.Parameters.AddWithValue("@proxima_oficina", obj.proxima_oficina);
+                    cmd.Parameters.AddWithValue("@id", obj.id);
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
                 }
